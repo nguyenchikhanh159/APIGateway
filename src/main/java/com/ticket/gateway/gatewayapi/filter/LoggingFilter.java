@@ -1,4 +1,4 @@
-package com.ticket.gateway.gatewayapi.config;
+package com.ticket.gateway.gatewayapi.filter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
