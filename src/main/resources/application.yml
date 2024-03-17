@@ -1,0 +1,33 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: orders-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/api/orders/v1
+
+        - id: tickets-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/api/tickets/v1
+
+        - id: ticket-order-service
+          uri: lb://TAKER-ORDER-SERVICE
+          predicates:
+            - Path=/api/ticket-orders/v1
+          filters:
+            - AuthenticationFilter
+
+        - id: identity-service
+          uri: lb://IDENTITY-SERVICE
+          predicates:
+            - Path=/auth/**
+
+  application:
+    name: ticket-gateway-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
